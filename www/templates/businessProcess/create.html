@@ -1,0 +1,47 @@
+<ion-view>
+	<ion-header-bar class="item-input-inset" align-title="left">
+	    <button class="button button-icon button-clear ion-navicon" menu-toggle="left"></button>
+	    <h1 class="title" style="text-align:center">{{'addtask' | translate}}</h1>
+		<button ng-if="model.task" class="button button-clear button-positive" ng-click="save()">{{'save' | translate}}</button>
+	</ion-header-bar>
+	<ion-content>
+		<div class="list">
+			<label class="item item-input">
+				{{'Project' | translate}}:<input type="text" name="Project" ng-model="model.project" >
+			</label>
+			<label class="item item-input">
+				{{'TaskName' | translate}}:<input type="text" name="taskname" ng-model="model.task" required>
+			</label>
+			<label class="item item-input">
+				{{'Notes' | translate}}:<input type="text" name="notes" ng-model="model.notes" >
+			</label>
+			<label class="item item-input">
+				{{'url' | translate}}:<input type="text" name="url" ng-model="model.url" >
+			</label>
+			<label class="item item-input">
+				<div >{{'datestart' | translate}}:</div><div ><input type="datetime-local" name="dateStart" ng-model="model.dateStart" ></div>
+			</label>
+			<label class="item item-input">
+				<div >{{'dateend' | translate}}:</div><div ><input type="datetime-local" name="dateEnd" ng-model="model.dateEnd" ></div>
+			</label>
+			<label class="item item-input">
+				<div >{{'dateexpect' | translate}}:</div><div ><input type="datetime-local" name="dateExpect" ng-model="model.dateExpect" ></div>
+			</label>			
+			<div class="item item-input">
+				<span>{{'Assign' | translate}}: </span>
+				<fancy-select-model template-url="templates/user/select.html" 
+					ng-selected="selected" 
+					ng-model="userlist" 
+					label="username" 
+					title="Select users">
+				</fancy-select-model>
+			</div>
+			
+			<div class="item">
+				<span>{{'progress' | translate}}(%): </span>
+				<input type="checkbox" class="todoCheckbox" ng-model="model.progress"
+					ng-true-value="'100'" ng-false-value="'0'">
+			</div>
+		</div>
+	</ion-content>
+</ion-view>

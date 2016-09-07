@@ -1,0 +1,12 @@
+<ion-header-bar class="item-input-inset">
+    <button class="button button-icon button-clear ion-navicon" menu-toggle="left">
+    </button>
+    <h1 class='title'>
+    	<span ng-if="progress == '0' && ownedBy == 'me'">{{'mytask' | translate}}</span>
+    	<span ng-if="progress != '0' && ownedBy == 'me'">{{'compledtask' | translate}}</span>
+    	<span ng-if="ownedBy != 'me'">{{'alltask' | translate}}</span>
+    </h1>
+    <button class="button ion-plus-round button-clear" ui-sref="app.createTodo"></button>  
+</ion-header-bar>
+
+<ng-include src="'templates/todo/item.html'"></ng-include>

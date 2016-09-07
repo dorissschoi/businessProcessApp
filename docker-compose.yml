@@ -1,0 +1,34 @@
+version: '2'
+services:
+  bprocApp_mongo_doris:
+    image: mongo
+    container_name: bprocApp_mongo_doris
+    hostname: bprocApp_mongo_doris
+    ports:
+      - 27017
+    volumes:
+      - ${COMPOSEROOT}/data/bproc_mongodata:/data/db
+    command: mongod --directoryperdb
+    env_file:
+      - ../.env 
+    
+  bprocApp_doris:
+    depends_on:
+      - bprocApp_mongo_doris
+    image: dorissschoi/businessProcessApp
+    container_name: bprocApp_doris
+    hostname: bprocApp_doris
+    entrypoint: top -b -d 1000
+    ports:
+      - 8006:1337
+      - 8007:8080
+    volumes:
+      - ${COMPOSEROOT}/businessProcessApp/config/env/development.coffee:/usr/src/app/config/env/development.coffee
+      - ${COMPOSEROOT}/businessProcessApp/www/js/config/development.coffee:/usr/src/app/www/js/config/development.coffee
+      - /etc/ssl/certs/mobile.ogcio.hksarg.pem:/etc/ssl/certs/mobile.ogcio.hksarg.pem
+      - /usr/local/share/ca-certificates/mobile.ogcio.hksarg.crt:/usr/local/share/ca-certificates/mobile.ogcio.hksarg.crt
+      - ${COMPOSEROOT}/businessProcessApp/entrypoint.sh:/usr/src/app/entrypoint.sh
+      - ${COMPOSEROOT}/businessProcessApp:/usr/src/app
+    env_file:
+      - ../.env 
+        
