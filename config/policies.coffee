@@ -5,9 +5,11 @@ module.exports =
 			'*':		false
 			find:		['isAuth']	
 			findOne:	['isAuth']			
-			create: 	['isAuth', 'setOwner' ]
+			create: 	['isAuth']
 			update: 	['isAuth']
 			destroy: 	['isAuth']
+			'deploy':	['isAuth']
+
 		UserController:
 			'*':		false
 			find:		true

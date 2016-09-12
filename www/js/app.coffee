@@ -1,6 +1,6 @@
 env = require './env.coffee'
 
-angular.module 'starter', ['ngFancySelect', 'ionic', 'util.auth', 'starter.controller', 'starter.model', 'http-auth-interceptor', 'ngTagEditor', 'ActiveRecord', 'ngTouch', 'ngAnimate', 'pascalprecht.translate', 'locale']
+angular.module 'starter', ['ngFancySelect', 'ionic', 'util.auth', 'starter.controller', 'starter.model', 'http-auth-interceptor', 'ngTagEditor', 'ActiveRecord', 'ngFileUpload', 'ngTouch', 'ngAnimate', 'pascalprecht.translate', 'locale']
 	
 	.run (authService) ->
 		authService.login env.oauth2.opts
@@ -11,16 +11,6 @@ angular.module 'starter', ['ngFancySelect', 'ionic', 'util.auth', 'starter.contr
 				cordova.plugins.Keyboard.hideKeyboardAccessoryBar(true)
 			if (window.StatusBar)
 				StatusBar.styleDefault()
-
-	.run ($rootScope, $ionicModal) ->
-		$rootScope.$on 'activitiImg', (event, inImg) ->
-			_.extend $rootScope,
-				imgUrl: inImg
-			
-			$ionicModal.fromTemplateUrl 'templates/modal.html', scope: $rootScope
-				.then (modal) ->
-					modal.show()
-					$rootScope.modal = modal
 											
 	.config ($stateProvider, $urlRouterProvider, $translateProvider) ->
 	
@@ -29,8 +19,8 @@ angular.module 'starter', ['ngFancySelect', 'ionic', 'util.auth', 'starter.contr
 			abstract: true
 			templateUrl: "templates/menu.html"
 	
-		$stateProvider.state 'app.createTodo',
-			url: "/businessprocess/create"
+		$stateProvider.state 'app.createBProc',
+			url: "/businessProcess/create"
 			cache: false
 			views:
 				'menuContent':
@@ -38,11 +28,25 @@ angular.module 'starter', ['ngFancySelect', 'ionic', 'util.auth', 'starter.contr
 					controller: 'BusinessProcessCtrl'
 			resolve:
 				resources: 'resources'
+				
 				model: (resources) ->
 					ret = new resources.BusinessProcess()				
 	
-		$stateProvider.state 'app.editTodo',
-			url: "/businessprocess/edit/:id"
+			$stateProvider.state 'app.deployBProc',
+			url: "/businessProcess/deploy"
+			cache: false
+			views:
+				'menuContent':
+					templateUrl: "templates/businessProcess/deploy.html"
+					controller: 'BusinessProcessCtrl'
+			resolve:
+				resources: 'resources'
+				
+				model: (resources) ->
+					ret = new resources.BusinessProcess()	
+					
+		$stateProvider.state 'app.editBProc',
+			url: "/businessProcess/edit/:id"
 			cache: false
 			views:
 				'menuContent':
@@ -52,14 +56,13 @@ angular.module 'starter', ['ngFancySelect', 'ionic', 'util.auth', 'starter.contr
 				id: ($stateParams) ->
 					$stateParams.id
 				resources: 'resources'
-				me: (resources) ->
-					resources.User.me().$fetch()
+				
 				model: (resources, id) ->
 					ret = new resources.BusinessProcess({id: id})
 					ret.$fetch()			
 		
 		$stateProvider.state 'app.list',
-			url: "/businessprocess/list"
+			url: "/businessProcess/list"
 			cache: false
 			views:
 				'menuContent':
@@ -67,9 +70,9 @@ angular.module 'starter', ['ngFancySelect', 'ionic', 'util.auth', 'starter.contr
 					controller: 'BusinessProcessListCtrl'
 			resolve:
 				resources: 'resources'	
-				collection: (resources, ownedBy, sortBy, progress) ->
+				collection: (resources) ->
 					ret = new resources.BusinessProcessList()
-					ret.$fetch({params: {progress: progress, ownedBy: ownedBy, sort: sortBy}})
+					ret.$fetch()
 						
-		$urlRouterProvider.otherwise('/businessprocess/list')
+		$urlRouterProvider.otherwise('/businessProcess/list')
 		

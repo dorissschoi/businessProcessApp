@@ -83,4 +83,17 @@ module.exports =
 				Authorization:	"Basic " + new Buffer("#{sails.config.activiti.username}:#{sails.config.activiti.password}").toString("base64")
 				'Content-Type': 'image/png'
 				
-		@req "get", contentUrl, {}, opts		
+		@req "get", contentUrl, {}, opts
+	
+	deployXML: (url, data) ->
+		opts = 
+			headers:
+				Authorization:	"Basic " + new Buffer("#{sails.config.activiti.username}:#{sails.config.activiti.password}").toString("base64")
+				'Content-Type': 'multipart/form-data'
+			multipart: true
+					
+		@req "post", url, data, opts
+			.then (res) ->
+				if res.statusCode == 201 then res.body else new Error res.statusCode
+			.catch (err) ->
+				sails.log.error err			

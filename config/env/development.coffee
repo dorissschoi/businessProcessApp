@@ -19,7 +19,15 @@ module.exports =
 		mongo:
 			adapter:	'sails-mongo'
 			driver:		'mongodb'
-			url: 'mongodb://bprocApp_mongo_doris/todosails' #dev
-		
+			url: 'mongodb://bprocApp_mongo_doris/bprocApp' #dev
+
+	file:
+		opts:
+			adapter:	require 'skipper-gridfs'
+			uri:		'mongodb://bprocApp_mongo_doris/file'
+			maxBytes:	10240000	# 10MB
+		img:
+			resize:		'25%'
+					
 	log:
 		level: 'silly'

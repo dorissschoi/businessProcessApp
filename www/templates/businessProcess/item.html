@@ -1,40 +1,20 @@
-<div>
-	<label class="item item-input">
-		<i class="icon ion-search placeholder-icon"></i>
-		<input type="search" placeholder="{{'Search' | translate}}" ng-model="searchTodos">
-	</label>
-</div>
-<ion-content class="todolist">	
+
+<ion-content class="">	
 	<ion-list>
-	<ion-item ng-repeat="model in collection.models | todosFilter:searchTodos | orderBy:'-createdAt' "  >
+	<ion-item ng-repeat="model in collection.models | orderBy:'-createdAt' "  >
 		<div class="row">
 			<div class="col">
-    
-    			<a class="icon-circle nocursor manualIcon" 
-    				ng-if="model.type==undefined || model.type == 'manual'"
-    				>
-          			<i class="ion-ios-person"></i>
+    			<a class="icon-circle nocursor manualIcon">
+          			<i class="ion-wrench"></i>
           		</a>
-          		
-    			<a class="icon-circle activitiIcon"
-    				ng-if="model.type!==undefined && model.type != 'manual' && model.progress < 100"
-    				ng-click="opendiagram(model)">
-          			<i class="ion-ios-people"></i>
-          		</a>
-          		<a class="icon-circle nocursor activitiEndIcon" 
-    				ng-if="model.type!==undefined && model.type != 'manual' && model.progress == 100">
-          			<i class="ion-ios-people"></i>
-          		</a>
-
 			</div>
-			<div class="col col-90" ng-click="openurl(model);">
-				<h2>{{model.task}}</h2>
-				<p>{{model.ownedBy.username}}<span  ng-if="model.dateStart != null">,</span> {{model.dateStart | date: 'dd-MM-yyyy' }}
+			<div class="col col-80">
+				<h2>{{model.name}}</h2>
+				
 			  	</p>
 			</div>
 		</div>
-		<ion-option-button ng-if="model.type!==undefined && model.type != 'manual' && model.progress < 100" class="button button-balanced icon-left ion-checkmark" on-tap="$event.stopPropagation(); completeTask(model);">Complete</ion-option-button>
-		<ion-option-button ng-if="model.type==undefined || model.type!==undefined && model.type == 'manual'" class="button button-positive icon-left ion-edit" on-tap="$event.stopPropagation(); edit(model);">Edit</ion-option-button>
+		<ion-option-button class="button button-positive icon-left ion-edit" on-tap="$event.stopPropagation(); edit(model);">Edit</ion-option-button>
 		<ion-option-button class="button button-assertive icon-left ion-trash-b" on-tap="$event.stopPropagation(); delete(model);">Delete</ion-option-button>
 	</ion-item>
 	</ion-list>

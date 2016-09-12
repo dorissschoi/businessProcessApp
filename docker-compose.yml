@@ -15,7 +15,7 @@ services:
   bprocApp_doris:
     depends_on:
       - bprocApp_mongo_doris
-    image: dorissschoi/businessProcessApp
+    image: dorissschoi/businessprocessapp
     container_name: bprocApp_doris
     hostname: bprocApp_doris
     entrypoint: top -b -d 1000
