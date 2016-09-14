@@ -5,4 +5,8 @@ module.exports =
 			controller:		'BusinessProcessController'
 			action:			'deploy'
 			
+		'GET /api/businessProcess/:deploymentId':
+			controller:		'BusinessProcessController'
+			action:			'getXML'
+			
 		

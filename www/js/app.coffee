@@ -32,7 +32,7 @@ angular.module 'starter', ['ngFancySelect', 'ionic', 'util.auth', 'starter.contr
 				model: (resources) ->
 					ret = new resources.BusinessProcess()				
 	
-			$stateProvider.state 'app.deployBProc',
+			$stateProvider.state 'app.deploy',
 			url: "/businessProcess/deploy"
 			cache: false
 			views:
@@ -45,7 +45,7 @@ angular.module 'starter', ['ngFancySelect', 'ionic', 'util.auth', 'starter.contr
 				model: (resources) ->
 					ret = new resources.BusinessProcess()	
 					
-		$stateProvider.state 'app.editBProc',
+		$stateProvider.state 'app.edit',
 			url: "/businessProcess/edit/:id"
 			cache: false
 			views:
@@ -75,4 +75,3 @@ angular.module 'starter', ['ngFancySelect', 'ionic', 'util.auth', 'starter.contr
 					ret.$fetch()
 						
 		$urlRouterProvider.otherwise('/businessProcess/list')
-		

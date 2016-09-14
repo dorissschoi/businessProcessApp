@@ -84,6 +84,15 @@ module.exports =
 				'Content-Type': 'image/png'
 				
 		@req "get", contentUrl, {}, opts
+
+	getXML: (contentUrl) ->
+		opts = 
+			headers:
+				Authorization:	"Basic " + new Buffer("#{sails.config.activiti.username}:#{sails.config.activiti.password}").toString("base64")
+				'Content-Type': 'application/xml;charset=utf-8'
+		
+		sails.log.info "getXML url: #{contentUrl}"		
+		@req "get", contentUrl, {}, opts		
 	
 	deployXML: (url, data) ->
 		opts = 
@@ -94,6 +103,8 @@ module.exports =
 					
 		@req "post", url, data, opts
 			.then (res) ->
-				if res.statusCode == 201 then res.body else new Error res.statusCode
+				if res.statusCode != 201  
+					sails.log.error JSON.stringify res.body 
+				res.ok
 			.catch (err) ->
-				sails.log.error err			
+				sails.log.error err

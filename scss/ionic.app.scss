@@ -73,3 +73,26 @@ iframe {
 	width: 100%;
 	border-radius: 4px; 
 }
+
+/* list view */
+.manualIcon {
+	background: #AAAAAA;
+}
+.activitiIcon {
+	background: #00a1e1;
+}
+
+.icon-circle{
+	position: relative;
+	display: inline-block;
+	margin: -1px;
+	width: 45px;
+	height: 45px; 
+	font-size:40px; 
+	-moz-border-radius:50%;
+	-webkit-border-radius:50%;
+	border-radius: 50%;
+	border: 1px solid #ebebeb;
+	text-align:center;
+	color: #fff;
+}

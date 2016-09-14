@@ -9,7 +9,7 @@ module.exports =
 			update: 	['isAuth']
 			destroy: 	['isAuth']
 			'deploy':	['isAuth']
-
+			getXML:		['isAuth']
 		UserController:
 			'*':		false
 			find:		true
