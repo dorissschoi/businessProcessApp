@@ -23,12 +23,12 @@ services:
       - 8006:1337
       - 8007:8080
     volumes:
-      - ${COMPOSEROOT}/businessProcessApp/config/env/development.coffee:/usr/src/app/config/env/development.coffee
-      - ${COMPOSEROOT}/businessProcessApp/www/js/config/development.coffee:/usr/src/app/www/js/config/development.coffee
+      - ${COMPOSEROOT}/businessProcessApp-82/config/env/development.coffee:/usr/src/app/config/env/development.coffee
+      - ${COMPOSEROOT}/businessProcessApp-82/www/js/config/development.coffee:/usr/src/app/www/js/config/development.coffee
       - /etc/ssl/certs/mobile.ogcio.hksarg.pem:/etc/ssl/certs/mobile.ogcio.hksarg.pem
       - /usr/local/share/ca-certificates/mobile.ogcio.hksarg.crt:/usr/local/share/ca-certificates/mobile.ogcio.hksarg.crt
-      - ${COMPOSEROOT}/businessProcessApp/entrypoint.sh:/usr/src/app/entrypoint.sh
-      - ${COMPOSEROOT}/businessProcessApp:/usr/src/app
+      - ${COMPOSEROOT}/businessProcessApp-82/entrypoint.sh:/usr/src/app/entrypoint.sh
+      - ${COMPOSEROOT}/businessProcessApp-82:/usr/src/app
     env_file:
       - ../.env 
         
