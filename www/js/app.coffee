@@ -11,7 +11,17 @@ angular.module 'starter', ['ngFancySelect', 'ionic', 'util.auth', 'starter.contr
 				cordova.plugins.Keyboard.hideKeyboardAccessoryBar(true)
 			if (window.StatusBar)
 				StatusBar.styleDefault()
-											
+
+	.run ($rootScope, $ionicModal) ->
+		$rootScope.$on 'activitiImg', (event, inImg) ->
+			_.extend $rootScope,
+				imgUrl: inImg
+			
+			$ionicModal.fromTemplateUrl 'templates/modal.html', scope: $rootScope
+				.then (modal) ->
+					modal.show()
+					$rootScope.modal = modal
+																
 	.config ($stateProvider, $urlRouterProvider, $translateProvider) ->
 	
 		$stateProvider.state 'app',

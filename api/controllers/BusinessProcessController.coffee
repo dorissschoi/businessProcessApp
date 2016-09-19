@@ -24,6 +24,9 @@ module.exports =
 				file: { file: files[0].fd, content_type: 'multipart/form-data' }
 			
 			activiti.deployXML "#{sails.config.activiti.url.deployment ''}", data
+				.then (rst) ->
+					res.ok(rst)
+				.catch res.serverError
 				
 	find: (req, res) ->
 		data = actionUtil.parseValues(req)
@@ -37,6 +40,16 @@ module.exports =
 						res.ok(val)
 			.catch res.serverError	
 
+	getDiagram: (req, res) ->
+		data = actionUtil.parseValues(req)
+		activiti.req 'get', "#{sails.config.activiti.url.deployment data.deploymentId}/resources"
+			.then (processdefList) ->
+				result = _.findWhere(processdefList.body,{type: 'resource'})
+				activiti.getProcDefDiagram "#{sails.config.activiti.url.deployment data.deploymentId}/resourcedata/#{result.id}"
+					.then (stream) ->
+						res.ok(stream.raw)
+			.catch res.serverError	
+			
 	getXML: (req, res) ->
 		data = actionUtil.parseValues(req)
 		activiti.req 'get', "#{sails.config.activiti.url.deployment data.deploymentId}/resources"

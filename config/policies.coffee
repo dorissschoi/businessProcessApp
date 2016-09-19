@@ -10,6 +10,7 @@ module.exports =
 			destroy: 	['isAuth']
 			'deploy':	['isAuth']
 			getXML:		['isAuth']
+			getDiagram:	['isAuth']
 		UserController:
 			'*':		false
 			find:		true

@@ -3,7 +3,7 @@
 	<ion-item ng-repeat="model in collection.models | orderBy:'-createdAt' "  >
 		<div class="row">
 			<div class="col">
-    			<a class="icon-circle nocursor activitiIcon">
+    			<a class="icon-circle nocursor activitiIcon" ng-click="opendiagram(model)">
           			<i class="ion-wrench"></i>
           		</a>
 			</div>
