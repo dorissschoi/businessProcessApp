@@ -12,20 +12,11 @@ module.exports =
 
 		sails.services.rest[method] {}, url, opts, data
 
-	getProcDefDiagram: (url) ->
-		opts = 
-			headers:
-				Authorization:	"Basic " + new Buffer("#{sails.config.activiti.username}:#{sails.config.activiti.password}").toString("base64")
-				'Content-Type': 'image/png'
-				
-		@req "get", url, {}, opts
-	
 	#curl -X GET  "/repository/deployments/52521/resourcedata/cccar.bpmn20.xml"
 	getXML: (url) ->
 		opts = 
 			headers:
 				Authorization:	"Basic " + new Buffer("#{sails.config.activiti.username}:#{sails.config.activiti.password}").toString("base64")
-				'Content-Type': 'text/xml'
 			parse: 'XML'
 		
 		sails.log.info "getXML url: #{url}"		

@@ -8,9 +8,8 @@ module.exports =
 			create: 	['isAuth']
 			update: 	['isAuth']
 			destroy: 	['isAuth']
-			'deploy':	['isAuth']
+			deploy:		['isAuth']
 			getXML:		['isAuth']
-			getDiagram:	['isAuth']
 		UserController:
 			'*':		false
 			find:		true

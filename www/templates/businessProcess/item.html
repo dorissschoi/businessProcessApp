@@ -3,7 +3,7 @@
 	<ion-item ng-repeat="model in collection.models | orderBy:'-createdAt' "  >
 		<div class="row">
 			<div class="col">
-    			<a class="icon-circle nocursor activitiIcon" ng-click="opendiagram(model)">
+    			<a class="icon-circle nocursor activitiIcon">
           			<i class="ion-wrench"></i>
           		</a>
 			</div>
@@ -13,7 +13,6 @@
 			</div>
 		</div>
 		<ion-option-button class="button button-positive icon-left ion-edit" on-tap="$event.stopPropagation(); getFile(model);">Download</ion-option-button>
-		<ion-option-button class="button button-assertive icon-left ion-trash-b" on-tap="$event.stopPropagation(); delete(model);">Delete</ion-option-button>
 	</ion-item>
 	</ion-list>
 	<ion-infinite-scroll ng-if="collection.state.skip < collection.state.count" on-infinite="loadMore()">

@@ -8,7 +8,4 @@ module.exports =
 		'GET /api/businessProcess/:deploymentId':
 			controller:		'BusinessProcessController'
 			action:			'getXML'
-			
-		'GET /api/businessProcess/:procInsId':
-			controller:		'BusinessProcessController'
-			action:			'getDiagram'		
+		

@@ -39,16 +39,6 @@ module.exports =
 							results:	result
 						res.ok(val)
 			.catch res.serverError	
-
-	getDiagram: (req, res) ->
-		data = actionUtil.parseValues(req)
-		activiti.req 'get', "#{sails.config.activiti.url.deployment data.deploymentId}/resources"
-			.then (processdefList) ->
-				result = _.findWhere(processdefList.body,{type: 'resource'})
-				activiti.getProcDefDiagram "#{sails.config.activiti.url.deployment data.deploymentId}/resourcedata/#{result.id}"
-					.then (stream) ->
-						res.ok(stream.raw)
-			.catch res.serverError	
 			
 	getXML: (req, res) ->
 		data = actionUtil.parseValues(req)
