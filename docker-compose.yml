@@ -10,7 +10,7 @@ services:
       - ${COMPOSEROOT}/data/bproc_mongodata:/data/db
     command: mongod --directoryperdb
     env_file:
-      - ../.env 
+      - ./.env 
     
   bprocApp_doris:
     depends_on:
@@ -30,5 +30,5 @@ services:
       - ${COMPOSEROOT}/businessProcessApp-82/entrypoint.sh:/usr/src/app/entrypoint.sh
       - ${COMPOSEROOT}/businessProcessApp-82:/usr/src/app
     env_file:
-      - ../.env 
+      - ./.env 
         

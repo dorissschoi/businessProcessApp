@@ -1,15 +1,9 @@
 http = require 'needle'
-fs = require 'fs'
 Promise = require 'bluebird'
-
-dir = '/etc/ssl/certs'
-files = fs.readdirSync(dir).filter (file) -> /.*\.pem/i.test(file)
-files = files.map (file) -> "#{dir}/#{file}"
-ca = files.map (file) -> fs.readFileSync file
 
 options = 
 	timeout:	sails.config.promise.timeout
-	ca:			ca
+
 tokenOptions = _.clone options	
 		
 module.exports =
@@ -22,7 +16,6 @@ module.exports =
 						Authorization:	"Bearer #{token}"
 				opts = _.omit opts, 'Content-Type', 'username', 'password'
 			
-			#sails.log "opts: " + JSON.stringify opts
 			http.get url, opts, (err, res) ->
 				if err
 					return reject err
