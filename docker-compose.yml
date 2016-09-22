@@ -1,9 +1,9 @@
 version: '2'
 services:
-  bprocApp_mongo_doris:
+  bprocApp_mongo:
     image: mongo
-    container_name: bprocApp_mongo_doris
-    hostname: bprocApp_mongo_doris
+    container_name: bprocApp_mongo
+    hostname: bprocApp_mongo
     ports:
       - 27017
     volumes:
@@ -12,12 +12,12 @@ services:
     env_file:
       - ./.env 
     
-  bprocApp_doris:
+  bprocApp:
     depends_on:
-      - bprocApp_mongo_doris
+      - bprocApp_mongo
     image: dorissschoi/businessprocessapp
-    container_name: bprocApp_doris
-    hostname: bprocApp_doris
+    container_name: bprocApp
+    hostname: bprocApp
     entrypoint: top -b -d 1000
     ports:
       - 8006:1337
