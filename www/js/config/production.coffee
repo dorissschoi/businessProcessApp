@@ -18,5 +18,5 @@ module.exports =
 			authUrl: "https://mob.myvnc.com/org/oauth2/authorize/"
 			response_type:  "token"
 			scope:          "https://mob.myvnc.com/org/users"
-			client_id:      'todoUAT'
+			client_id:      'businessProcessAppUAT'
 			
