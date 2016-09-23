@@ -19,7 +19,7 @@ module.exports =
 		mongo:
 			adapter:	'sails-mongo'
 			driver:		'mongodb'
-			url: 'mongodb://bprocApp_mongo_doris/bprocApp' #dev
+			url: 'mongodb://bprocApp_mongo/bprocApp' #dev
 					
 	log:
 		level: 'silly'
