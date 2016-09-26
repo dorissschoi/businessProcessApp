@@ -29,20 +29,7 @@ angular.module 'starter', ['ngFancySelect', 'ionic', 'util.auth', 'starter.contr
 			abstract: true
 			templateUrl: "templates/menu.html"
 	
-		$stateProvider.state 'app.createBProc',
-			url: "/businessProcess/create"
-			cache: false
-			views:
-				'menuContent':
-					templateUrl: "templates/businessProcess/create.html"
-					controller: 'BusinessProcessCtrl'
-			resolve:
-				resources: 'resources'
-				
-				model: (resources) ->
-					ret = new resources.BusinessProcess()				
-	
-			$stateProvider.state 'app.deploy',
+		$stateProvider.state 'app.deploy',
 			url: "/businessProcess/deploy"
 			cache: false
 			views:
@@ -55,22 +42,6 @@ angular.module 'starter', ['ngFancySelect', 'ionic', 'util.auth', 'starter.contr
 				model: (resources) ->
 					ret = new resources.BusinessProcess()	
 					
-		$stateProvider.state 'app.edit',
-			url: "/businessProcess/edit/:id"
-			cache: false
-			views:
-				'menuContent':
-					templateUrl: "templates/businessProcess/edit.html"
-					controller: 'BusinessProcessCtrl'
-			resolve:
-				id: ($stateParams) ->
-					$stateParams.id
-				resources: 'resources'
-				
-				model: (resources, id) ->
-					ret = new resources.BusinessProcess({id: id})
-					ret.$fetch()			
-		
 		$stateProvider.state 'app.list',
 			url: "/businessProcess/list"
 			cache: false

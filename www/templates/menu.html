@@ -10,10 +10,10 @@
       <ion-list>
         
         <ion-item nav-clear menu-close href="#/businessProcess/deploy">
-          Deploy
+          {{'upload' | translate}}
         </ion-item>
         <ion-item nav-clear menu-close href="#/businessProcess/list">
-          List
+          {{'processdef' | translate}}
         </ion-item>        
         
         <ion-item nav-clear menu-close ng-if="env.isNative()" ng-click="navigator.app.exitApp()">
