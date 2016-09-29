@@ -1,9 +1,9 @@
 version: '2'
 services:
-  bprocApp_mongo:
+  businessproc_mongo:
     image: mongo
-    container_name: bprocApp_mongo
-    hostname: bprocApp_mongo
+    container_name: businessproc_mongo
+    hostname: businessproc_mongo
     ports:
       - 27017
     volumes:
@@ -12,23 +12,23 @@ services:
     env_file:
       - ./.env 
     
-  bprocApp:
+  businessproc:
     depends_on:
-      - bprocApp_mongo
-    image: dorissschoi/businessprocessapp
-    container_name: bprocApp
-    hostname: bprocApp
+      - businessproc_mongo
+    image: dorissschoi/businessproc
+    container_name: businessproc
+    hostname: businessproc
     entrypoint: top -b -d 1000
     ports:
       - 8006:1337
       - 8007:8080
     volumes:
-      - ${COMPOSEROOT}/businessProcessApp-82/config/env/development.coffee:/usr/src/app/config/env/development.coffee
-      - ${COMPOSEROOT}/businessProcessApp-82/www/js/config/development.coffee:/usr/src/app/www/js/config/development.coffee
+      - ${COMPOSEROOT}/businessproc/config/env/development.coffee:/usr/src/app/config/env/development.coffee
+      - ${COMPOSEROOT}/businessproc/www/js/config/development.coffee:/usr/src/app/www/js/config/development.coffee
       - /etc/ssl/certs/mobile.ogcio.hksarg.pem:/etc/ssl/certs/mobile.ogcio.hksarg.pem
       - /usr/local/share/ca-certificates/mobile.ogcio.hksarg.crt:/usr/local/share/ca-certificates/mobile.ogcio.hksarg.crt
-      - ${COMPOSEROOT}/businessProcessApp-82/entrypoint.sh:/usr/src/app/entrypoint.sh
-      - ${COMPOSEROOT}/businessProcessApp-82:/usr/src/app
+      - ${COMPOSEROOT}/businessproc/entrypoint.sh:/usr/src/app/entrypoint.sh
+      - ${COMPOSEROOT}/businessproc:/usr/src/app
     env_file:
       - ./.env 
         
