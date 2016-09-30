@@ -1,24 +1,9 @@
 version: '2'
 services:
-  businessproc_mongo:
-    image: mongo
-    container_name: businessproc_mongo
-    hostname: businessproc_mongo
-    ports:
-      - 27017
-    volumes:
-      - ${COMPOSEROOT}/data/bproc_mongodata:/data/db
-    command: mongod --directoryperdb
-    env_file:
-      - ./.env 
-    
   businessproc:
-    depends_on:
-      - businessproc_mongo
     image: dorissschoi/businessproc
-    container_name: businessproc
     hostname: businessproc
-    entrypoint: top -b -d 1000
+    container_name: businessproc    
     ports:
       - 8006:1337
       - 8007:8080
@@ -27,8 +12,20 @@ services:
       - ${COMPOSEROOT}/businessproc/www/js/config/development.coffee:/usr/src/app/www/js/config/development.coffee
       - /etc/ssl/certs/mobile.ogcio.hksarg.pem:/etc/ssl/certs/mobile.ogcio.hksarg.pem
       - /usr/local/share/ca-certificates/mobile.ogcio.hksarg.crt:/usr/local/share/ca-certificates/mobile.ogcio.hksarg.crt
-      - ${COMPOSEROOT}/businessproc/entrypoint.sh:/usr/src/app/entrypoint.sh
-      - ${COMPOSEROOT}/businessproc:/usr/src/app
+      #- ${COMPOSEROOT}/businessproc/entrypoint.sh:/usr/src/app/entrypoint.sh
+      #- ${COMPOSEROOT}/businessproc:/usr/src/app
+      
     env_file:
-      - ./.env 
-        
+      - ./.env
+    external_links:
+      - businessproc_mongo
+    networks:
+      - activiti_default
+      - businessprocmongo_default
+    #entrypoint: top -b -d 1000          
+
+networks:
+  activiti_default:
+    external: true
+  businessprocmongo_default:
+    external: true

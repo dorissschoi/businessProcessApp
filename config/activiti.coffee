@@ -1,4 +1,4 @@
-serverurl = "http://10.30.224.82:8003/activiti-rest/service"
+serverurl = "http://activiti:8080/activiti-rest/service"
 
 module.exports.activiti =
 	
