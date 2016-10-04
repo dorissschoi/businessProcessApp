@@ -17,6 +17,8 @@ angular.module 'starter.controller', [ 'ionic', 'http-auth-interceptor', 'ngCord
 				bpModel = new resources.BusinessProcess id: item.deploymentId
 				bpModel.$fetch()
 					.then (data)->
+						$scope.myBlobObject=new Blob([src], { type: "text/xml"})
+						
 						downloadtime = $filter("date")(new Date(), "HHmmss")
 						src = new Buffer(data).toString('utf8')
 						url = URL.createObjectURL(new Blob([src], { type: "text/xml"}))
