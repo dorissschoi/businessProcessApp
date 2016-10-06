@@ -1,4 +1,5 @@
 Promise = require 'bluebird'
+fs = require 'fs'
 actionUtil = require 'sails/lib/hooks/blueprints/actionUtil'
 create = require 'sails/lib/hooks/blueprints/actions/create'
 
@@ -15,6 +16,7 @@ module.exports =
 	deploy: (req, res) ->
 		fileOpts = 
 			saveAs: req.file('file')._files[0].stream.filename
+			dirname: require('path').resolve(sails.config.appPath, 'uploads')
 						 
 		req.file('file').upload fileOpts, (err, files) ->
 			if err
@@ -25,7 +27,18 @@ module.exports =
 			
 			activiti.deployXML "#{sails.config.activiti.url.deployment ''}", data
 				.then (rst) ->
-					res.ok(rst)
+					sails.log.info "Del file: #{files[0].fd}"
+					fs.unlinkSync "#{files[0].fd}"
+							
+					data =
+						deploymentId:	rst.body.id
+						deploymentTime:	rst.body.deploymentTime
+						filename:		rst.body.name
+						createdBy:		req.user.username
+					sails.models.businessprocess.create(data)
+						.then (newInstance) ->
+							res.ok newInstance
+
 				.catch res.serverError
 				
 	find: (req, res) ->

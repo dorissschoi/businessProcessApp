@@ -1,6 +1,6 @@
 env = require './env.coffee'
 
-angular.module 'starter', ['ngFancySelect', 'ionic', 'util.auth', 'starter.controller', 'starter.model', 'http-auth-interceptor', 'ngTagEditor', 'ActiveRecord', 'ngFileUpload', 'ngTouch', 'ngAnimate', 'pascalprecht.translate', 'locale']
+angular.module 'starter', ['ngFancySelect', 'ionic', 'util.auth', 'starter.controller', 'starter.model', 'http-auth-interceptor', 'ngTagEditor', 'ActiveRecord', 'ngFileUpload', 'ngFileSaver', 'ngTouch', 'ngAnimate', 'pascalprecht.translate', 'locale']
 	
 	.run (authService) ->
 		authService.login env.oauth2.opts

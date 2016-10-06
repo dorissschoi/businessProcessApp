@@ -5,13 +5,20 @@
 
 				
 module.exports =
-	tableName:		'businessProcess'
+	tableName:		'businessprocess'
   
 	schema: 		true
   
 	attributes:
+
+		deploymentId:
+			type: 		'string'
+			required:	true
+
+		deploymentTime:
+			type: 'datetime'
   
-		name:
+		filename:
 			type: 		'string'
 			required:	true
 			

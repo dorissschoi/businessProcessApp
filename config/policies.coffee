@@ -5,9 +5,6 @@ module.exports =
 			'*':		false
 			find:		['isAuth']	
 			findOne:	['isAuth']			
-			create: 	['isAuth']
-			update: 	['isAuth']
-			destroy: 	['isAuth']
 			deploy:		['isAuth']
 			getXML:		['isAuth']
 		UserController:

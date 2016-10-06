@@ -30,6 +30,3 @@ module.exports =
 			multipart: true
 					
 		@req "post", url, data, opts
-			.then (res) ->
-				if res.statusCode != 201  
-					sails.log.error JSON.stringify res.body 

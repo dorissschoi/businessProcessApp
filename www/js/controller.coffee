@@ -8,7 +8,7 @@ angular.module 'starter.controller', [ 'ionic', 'http-auth-interceptor', 'ngCord
 		$scope.env = env
 		$scope.navigator = navigator
 
-	.controller 'BusinessProcessListCtrl', ($rootScope, $stateParams, $scope, collection, $location, resources, $ionicModal, $filter) ->
+	.controller 'BusinessProcessListCtrl', ($rootScope, $stateParams, $scope, collection, $location, resources, $ionicModal, $filter, FileSaver, Blob) ->
 		_.extend $scope,
 			
 			collection: collection
@@ -17,16 +17,11 @@ angular.module 'starter.controller', [ 'ionic', 'http-auth-interceptor', 'ngCord
 				bpModel = new resources.BusinessProcess id: item.deploymentId
 				bpModel.$fetch()
 					.then (data)->
-						$scope.myBlobObject=new Blob([src], { type: "text/xml"})
 						
 						downloadtime = $filter("date")(new Date(), "HHmmss")
 						src = new Buffer(data).toString('utf8')
-						url = URL.createObjectURL(new Blob([src], { type: "text/xml"}))
-						a = document.createElement('a')
-						a.href = url
-						a.download = "BusinessProcess#{downloadtime}.xml"
-						a.target = '_blank'
-						a.click()
+						f = new Blob([src], { type: "text/xml"})
+						FileSaver.saveAs(f, "BusinessProcess#{downloadtime}.xml")
 						
 			loadMore: ->
 				collection.$fetch()

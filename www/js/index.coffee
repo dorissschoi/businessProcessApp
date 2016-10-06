@@ -18,6 +18,9 @@ require 'angular-activerecord'
 require 'angular-http-auth'
 require 'angular-touch'
 require 'ng-file-upload'
+
+require 'angular-file-saver'
+
 require 'tagDirective'
 require 'angular-translate'
 require 'angular-translate-loader-static-files'
