@@ -20,7 +20,7 @@ angular.module 'starter.controller', [ 'ionic', 'http-auth-interceptor', 'ngCord
 						
 						downloadtime = $filter("date")(new Date(), "HHmmss")
 						src = new Buffer(data).toString('utf8')
-						f = new Blob([src], { type: "text/xml"})
+						f = new Blob([src], { type: "text/plain;charset=utf-8"})
 						FileSaver.saveAs(f, "BusinessProcess#{downloadtime}.xml")
 						
 			loadMore: ->
