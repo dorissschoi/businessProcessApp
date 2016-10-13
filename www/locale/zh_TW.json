@@ -4,5 +4,7 @@
     "download":		"下載",
     "save":			"保存",
     "menu":			"菜單",
-    "selectfile":	"選擇文件"
+    "selectfile":	"選擇文件",
+    "history":		"歷史",
+    "delete":		"刪除"
 }

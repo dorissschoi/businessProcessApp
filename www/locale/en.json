@@ -4,5 +4,7 @@
 	"download":			"Download",
     "save":				"Save",
     "menu":				"Menu",
-    "selectfile":		"Please select file"
+    "selectfile":		"Please select file",
+    "history":			"History",
+    "delete":			"Delete"
 }

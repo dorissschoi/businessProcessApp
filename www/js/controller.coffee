@@ -43,3 +43,17 @@ angular.module 'starter.controller', [ 'ionic', 'http-auth-interceptor', 'ngCord
 					Upload.upload(opts)
 						.then (resp) ->
 							$location.url "/businessProcess/list"
+	
+	.controller 'ListProcessinsCtrl', ($rootScope, $stateParams, $scope, collection, $location, resources) ->
+		_.extend $scope,
+			
+			collection: collection
+			
+			delete: (item) ->
+				collection.remove item
+				
+			loadMore: ->
+				collection.$fetch()
+					.then ->
+						$scope.$broadcast('scroll.infiniteScrollComplete')
+					.catch alert		

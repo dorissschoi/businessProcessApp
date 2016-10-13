@@ -41,20 +41,19 @@ module.exports =
 							.then (newInstance) ->
 								res.ok newInstance
 					else
-						sails.log.error JSON.stringify rst.body
-						return res.serverError(rst.body)
+						res.serverError(rst.body)
 				.catch res.serverError
 				
 	find: (req, res) ->
 		data = actionUtil.parseValues(req)
-		activiti.req "get", "#{sails.config.activiti.url.processdeflist}&start=#{data.skip}"
+		activiti.req "get", "#{sails.config.activiti.url.processdeflist}?category=http://activiti.org/test&start=#{data.skip}"
 			.then (processdefList) ->
 				Promise.all _.map processdefList.body.data, getDeploymentDetails
-					.then (result) ->
-						val =
-							count:		processdefList.body.total
-							results:	result
-						res.ok(val)
+			.then (result) ->
+				val =
+					count:		result.length
+					results:	result
+				res.ok(val)
 			.catch res.serverError	
 			
 	getXML: (req, res) ->

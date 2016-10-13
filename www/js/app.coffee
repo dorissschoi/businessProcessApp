@@ -54,5 +54,18 @@ angular.module 'starter', ['ngFancySelect', 'ionic', 'util.auth', 'starter.contr
 				collection: (resources) ->
 					ret = new resources.BusinessProcessList()
 					ret.$fetch()
-						
+		
+		$stateProvider.state 'app.history',
+			url: "/processins/history"
+			cache: false
+			views:
+				'menuContent':
+					templateUrl: "templates/processins/list.html"
+					controller: 'ListProcessinsCtrl'
+			resolve:
+				resources: 'resources'	
+				collection: (resources) ->
+					ret = new resources.ProcessinsList()
+					ret.$fetch()
+									
 		$urlRouterProvider.otherwise('/businessProcess/list')

@@ -12,14 +12,13 @@ module.exports =
 
 		sails.services.rest[method] {}, url, opts, data
 
-	#curl -X GET  "/repository/deployments/52521/resourcedata/cccar.bpmn20.xml"
 	getXML: (url) ->
 		opts = 
 			headers:
 				Authorization:	"Basic " + new Buffer("#{sails.config.activiti.username}:#{sails.config.activiti.password}").toString("base64")
 			parse: 'XML'
 		
-		sails.log.info "getXML url: #{url}"		
+		sails.log.debug "getXML url: #{url}"		
 		@req "get", url, {}, opts
 		
 	deployXML: (url, data) ->
@@ -30,3 +29,4 @@ module.exports =
 			multipart: true
 					
 		@req "post", url, data, opts
+
