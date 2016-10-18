@@ -13,6 +13,9 @@ angular.module 'starter.controller', [ 'ionic', 'http-auth-interceptor', 'ngCord
 			
 			collection: collection
 			
+			delete: (item) ->
+				collection.remove item
+							
 			getFile: (item) ->
 				bpModel = new resources.BusinessProcess id: item.deploymentId
 				bpModel.$fetch()
@@ -43,6 +46,8 @@ angular.module 'starter.controller', [ 'ionic', 'http-auth-interceptor', 'ngCord
 					Upload.upload(opts)
 						.then (resp) ->
 							$location.url "/businessProcess/list"
+						.catch (err) ->
+							alert {data:{error: "Upload file error."}}	
 	
 	.controller 'ListProcessinsCtrl', ($rootScope, $stateParams, $scope, collection, $location, resources) ->
 		_.extend $scope,

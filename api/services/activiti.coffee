@@ -30,3 +30,18 @@ module.exports =
 					
 		@req "post", url, data, opts
 
+	delDeployment: (depId) ->
+		@req "delete", sails.config.activiti.url.deployment depId
+			.then (res) ->
+				if res.statusCode == 204
+					return res.body
+
+	defList: (depId) ->
+		@req "get", "#{sails.config.activiti.url.processdeflist}?deploymentId=#{depId}&sort=id"
+							
+	
+	existIns: (defId) ->
+		data =
+			processDefinitionId: defId			
+		@req "post", sails.config.activiti.url.queryinslist, data
+	

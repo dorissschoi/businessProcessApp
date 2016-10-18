@@ -9,14 +9,38 @@ getDeploymentDetails = (procDef) ->
 		.then (rst) ->
 			activiti.req 'get', sails.config.activiti.url.deployment procDef.deploymentId
 				.then (result) ->
-					procDef.deploymentDetails = result.body
 					if rst.length > 0
-						procDef.createdBy = rst[0].createdBy
-					return procDef
+						rst[0].deploymentDetails = result.body
+						rst[0].definition = procDef
+						return rst[0]
 		.catch (err) ->
 			sails.log.error err
 						
 module.exports = 
+	destroy: (req, res) ->
+		pk = actionUtil.requirePk req
+		Model = actionUtil.parseModel req
+		
+		Model
+			.findOne pk
+			.populateAll()
+			.then (obj) ->
+				activiti.defList obj.deploymentId
+			.then (task) ->
+				sails.log.debug "Del process def: #{JSON.stringify task.body.data[0].id}"
+				activiti.existIns task.body.data[0].id
+			.then (cnt) ->
+				if cnt.body.total ==0
+					Model.destroy(pk)
+						.then (delRecord) ->
+							sails.log.debug "deploymentId: #{delRecord[0].deploymentId}"
+							activiti.delDeployment delRecord[0].deploymentId
+							res.ok delRecord
+				else
+					res.serverError	"Process definition contain running instance"		
+			.catch (err) ->
+				sails.log.error err
+    	
 		
 	deploy: (req, res) ->
 		fileOpts = 
