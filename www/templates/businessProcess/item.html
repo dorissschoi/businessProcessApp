@@ -1,6 +1,6 @@
 <ion-content class="">	
 	<ion-list>
-	<ion-item ng-repeat="model in collection.models | orderBy:'-createdAt' "  >
+	<ion-item ng-if="model.createdBy != null" ng-repeat="model in collection.models | orderBy:'-createdAt' "  >
 		<div class="row">
 			<div class="col">
     			<a class="icon-circle nocursor activitiIcon" 
