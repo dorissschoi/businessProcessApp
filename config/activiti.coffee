@@ -10,6 +10,9 @@ module.exports.activiti =
 		queryinslist: "#{serverurl}/query/process-instances"
 		deployment: (id) ->
 			"#{serverurl}/repository/deployments/#{id}"
+		historytask: "#{serverurl}/history/historic-task-instances"	
+		historyproc: "#{serverurl}/history/historic-process-instances"	
 			
 	username:	'kermit'
 	password:	'kermit'
+	#serverurl:  'http://activiti:8080/activiti-rest/service'

@@ -1,21 +1,17 @@
-<ion-content class="">	
+<ion-content >	
 	<ion-list>
-	<ion-item ng-if="model.createdBy != null" ng-repeat="model in collection.models | orderBy:'-createdAt' "  >
-		<div class="row">
-			<div class="col">
-    			<a class="icon-circle nocursor activitiIcon" 
-    				ng-click="getFile(model)" >
-          			<i class="ion-wrench"></i>
-          		</a>
-			</div>
-			<div class="col col-80">
-				<h2>{{model.definition.key}}</h2>
-			  	<p>v{{model.definition.version}}, {{ model.deploymentDetails.deploymentTime | date: 'dd-MM-yyyy HH:mm' }}, {{ model.createdBy}}</p>
-			  	
-			</div>
-		</div>
-		<ion-option-button class="button button-assertive icon-left ion-trash-b" on-tap="$event.stopPropagation(); delete(model);">{{'delete' | translate}}</ion-option-button>
-	</ion-item>
+	
+	<ion-item 
+	ng-repeat="model in collection.models | orderBy:'- deploymentTime' " 
+	ng-click="getFile(model)"
+	item="item" class="item-avatar">
+          
+		<i class="item-image icon-circle activitiIcon ion-ios-people"></i>
+		<h2>{{model.definition.name}}</h2>
+		<p>v{{model.definition.version}}, {{ model.deploymentTime | date: 'dd-MM-yyyy HH:mm' }}, {{ model.createdBy}}</p>
+	<ion-option-button class="button button-assertive icon-left ion-trash-b" on-tap="$event.stopPropagation(); delete(model);">{{'delete' | translate}}</ion-option-button>		
+	</ion-item>	
+	
 	</ion-list>
 	<ion-infinite-scroll ng-if="collection.state.skip < collection.state.count" on-infinite="loadMore()">
 	</ion-infinite-scroll>	
