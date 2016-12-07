@@ -2,7 +2,7 @@ Promise = require 'bluebird'
 fs = require 'fs'
 actionUtil = require 'sails/lib/hooks/blueprints/actionUtil'
 create = require 'sails/lib/hooks/blueprints/actions/create'
-activiticlient = require 'activiti-client' 
+
 
 getDeploymentUser = (procDef) ->
 	sails.models.businessprocess
@@ -16,7 +16,6 @@ getDeploymentUser = (procDef) ->
 						
 module.exports = 
 	destroy: (req, res) ->
-		
 		pk = actionUtil.requirePk req
 		Model = actionUtil.parseModel req
 		
@@ -24,16 +23,16 @@ module.exports =
 			.findOne pk
 			.populateAll()
 			.then (obj) ->
-				activiticlient.definition.getID obj.deploymentId
+				activiti.definition.getID obj.deploymentId
 			.then (task) ->
 				sails.log.debug "Del process def: #{JSON.stringify task.body.data[0].id}"
-				activiticlient.instance.haveTask task.body.data[0].id
+				activiti.instance.haveTask task.body.data[0].id
 			.then (cnt) ->
 				if cnt.body.total ==0
 					Model.destroy(pk)
 						.then (delRecord) ->
 							sails.log.debug "deploymentId: #{delRecord[0].deploymentId}"
-							activiticlient.definition.delDeployment delRecord[0].deploymentId
+							activiti.definition.delete delRecord[0].deploymentId
 							res.ok delRecord
 				else
 					res.serverError	"Process definition contain running instance"		
@@ -51,7 +50,7 @@ module.exports =
 				return res.serverError(err)
 			data = 
 				file: { file: files[0].fd, content_type: 'multipart/form-data' }
-			activiticlient.definition.deployXML data
+			activiti.definition.create data
 				.then (rst) ->
 					if rst.statusCode == 201  
 						fs.unlinkSync "#{files[0].fd}"
@@ -69,8 +68,7 @@ module.exports =
 				
 	find: (req, res) ->
 		data = actionUtil.parseValues(req)
-		#activiticlient.definition.list sails.config.activiti data.skip
-		activiticlient.definition.list data.skip
+		activiti.definition.list data.skip
 			.then (processdefList) ->
 				Promise.all _.map processdefList.results, getDeploymentUser
 			.then (result) ->
@@ -82,7 +80,7 @@ module.exports =
 			
 	getXML: (req, res) ->
 		data = actionUtil.parseValues(req)
-		activiticlient.definition.downloadXML data.deploymentId
+		activiti.definition.read data.deploymentId
 			.then (stream) ->
 				res.ok(stream)
 			.catch res.serverError
