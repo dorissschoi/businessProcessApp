@@ -23,7 +23,7 @@ module.exports =
 			.findOne pk
 			.populateAll()
 			.then (obj) ->
-				activiti.definition.getID obj.deploymentId
+				activiti.definition.findbyDepId obj.deploymentId
 			.then (task) ->
 				sails.log.debug "Del process def: #{JSON.stringify task.body.data[0].id}"
 				activiti.instance.haveTask task.body.data[0].id
@@ -48,9 +48,9 @@ module.exports =
 		req.file('file').upload fileOpts, (err, files) ->
 			if err
 				return res.serverError(err)
-			data = 
-				file: { file: files[0].fd, content_type: 'multipart/form-data' }
-			activiti.definition.create data
+
+			sails.log.debug "upload file: #{files[0].fd}"
+			activiti.definition.create files[0].fd
 				.then (rst) ->
 					if rst.statusCode == 201  
 						fs.unlinkSync "#{files[0].fd}"
@@ -80,7 +80,7 @@ module.exports =
 			
 	getXML: (req, res) ->
 		data = actionUtil.parseValues(req)
-		activiti.definition.read data.deploymentId
+		activiti.definition.getXML data.deploymentId
 			.then (stream) ->
 				res.ok(stream)
 			.catch res.serverError
