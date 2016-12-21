@@ -45,6 +45,12 @@ angular.module 'starter.model', ['PageableAR']
 			model: Processins
 		
 			$urlRoot: "api/processins"	
+		
+		#
+		class ProcessinsHistoryList extends pageableAR.PageableCollection
+			model: Processins
+		
+			$urlRoot: "api/processinsHistory"
 			
 		BusinessProcess:		BusinessProcess
 		BusinessProcessList:	BusinessProcessList
@@ -52,3 +58,4 @@ angular.module 'starter.model', ['PageableAR']
 		UserList:	UserList
 		Processins:				Processins
 		ProcessinsList:			ProcessinsList
+		ProcessinsHistoryList:	ProcessinsHistoryList

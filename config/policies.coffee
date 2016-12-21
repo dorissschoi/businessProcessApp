@@ -5,9 +5,10 @@ module.exports =
 			'*':		false
 			find:		['isAuth']	
 			findOne:	['isAuth']			
-			deploy:		['isAuth']
+			create:		['isAuth']
 			getXML:		['isAuth']
-			destroy: 	['isAuth', 'canDestroy']
+			destroy: 	['isAuth']
+			update:		['isAuth']
 		UserController:
 			'*':		false
 			find:		true
@@ -17,3 +18,4 @@ module.exports =
 			find:		['isAuth']	
 			findOne:	['isAuth']			
 			destroy: 	['isAuth']
+			history: 	['isAuth']

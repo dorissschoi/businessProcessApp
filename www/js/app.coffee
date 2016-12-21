@@ -60,6 +60,19 @@ angular.module 'starter', ['ngFancySelect', 'ionic', 'util.auth', 'starter.contr
 			cache: false
 			views:
 				'menuContent':
+					templateUrl: "templates/processins/historyList.html"
+					controller: 'ListProcessinsHistoryCtrl'
+			resolve:
+				resources: 'resources'	
+				collection: (resources) ->
+					ret = new resources.ProcessinsHistoryList()
+					ret.$fetch()
+
+		$stateProvider.state 'app.insList',
+			url: "/processins/insList"
+			cache: false
+			views:
+				'menuContent':
 					templateUrl: "templates/processins/list.html"
 					controller: 'ListProcessinsCtrl'
 			resolve:
@@ -67,5 +80,5 @@ angular.module 'starter', ['ngFancySelect', 'ionic', 'util.auth', 'starter.contr
 				collection: (resources) ->
 					ret = new resources.ProcessinsList()
 					ret.$fetch()
-									
+														
 		$urlRouterProvider.otherwise('/businessProcess/list')

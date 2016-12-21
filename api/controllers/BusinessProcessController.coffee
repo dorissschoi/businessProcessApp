@@ -40,7 +40,7 @@ module.exports =
 				sails.log.error err
     	
 		
-	deploy: (req, res) ->
+	create: (req, res) ->
 		fileOpts = 
 			saveAs: req.file('file')._files[0].stream.filename
 			dirname: require('path').resolve(sails.config.appPath, 'uploads')
@@ -84,4 +84,18 @@ module.exports =
 			.then (stream) ->
 				res.ok(stream)
 			.catch res.serverError
+
+	update: (req, res) ->
+		data = actionUtil.parseValues(req)
+		sails.log.debug "update process def: #{JSON.stringify data.definition}"
+		input =
+			"action": "suspend"
+			"includeProcessInstances": "false"
+		activiti.definition.suspend data.definition.id, input
+			.then (rst) ->	
+				sails.log.debug "update : #{JSON.stringify rst.body}"
+				res.ok(rst.statusCode)
+					
+			.catch res.serverError
+					
 	

@@ -1,10 +1,12 @@
 {
     "processdef":	"流程清單",
+    "runningprocins":	"已開始流程",
     "upload":		"上載",
     "download":		"下載",
     "save":			"保存",
     "menu":			"菜單",
     "selectfile":	"選擇文件",
-    "history":		"歷史",
-    "delete":		"刪除"
+    "history":		"已完成流程歷史",
+    "delete":		"刪除",
+    "suspend":		"暫停"
 }

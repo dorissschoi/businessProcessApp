@@ -15,12 +15,19 @@ angular.module 'starter.controller', [ 'ionic', 'http-auth-interceptor', 'ngCord
 			
 			delete: (item) ->
 				collection.remove item
-							
+
+			suspend: (item) ->
+				item.suspended = true
+				item.$save()
+					.then ->
+						collection.$refetch()
+					.catch (err) ->
+						alert {data:{error: "Suspend error."}}	
+													
 			getFile: (item) ->
 				bpModel = new resources.BusinessProcess id: item.deploymentId
 				bpModel.$fetch()
 					.then (data)->
-						
 						downloadtime = $filter("date")(new Date(), "HHmmss")
 						src = new Buffer(data).toString('utf8')
 						f = new Blob([src], { type: "text/plain;charset=utf-8"})
@@ -39,7 +46,7 @@ angular.module 'starter.controller', [ 'ionic', 'http-auth-interceptor', 'ngCord
 			putfile: ($file) ->
 				if $file and $file.length != 0
 					opts = 
-						url: 'api/businessProcess/deploy'
+						url: 'api/businessProcess'
 						data:
 							file: $file
 
@@ -53,12 +60,23 @@ angular.module 'starter.controller', [ 'ionic', 'http-auth-interceptor', 'ngCord
 		_.extend $scope,
 			
 			collection: collection
-			
-			delete: (item) ->
-				collection.remove item
 				
 			loadMore: ->
 				collection.$fetch()
 					.then ->
 						$scope.$broadcast('scroll.infiniteScrollComplete')
-					.catch alert		
+					.catch alert
+
+	.controller 'ListProcessinsHistoryCtrl', ($rootScope, $stateParams, $scope, collection, $location, resources) ->
+		_.extend $scope,
+			
+			collection: collection
+	
+			delete: (item) ->
+				collection.remove item
+			
+			loadMore: ->
+				collection.$fetch()
+					.then ->
+						$scope.$broadcast('scroll.infiniteScrollComplete')
+					.catch alert							

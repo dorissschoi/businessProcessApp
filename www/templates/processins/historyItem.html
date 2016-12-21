@@ -1,0 +1,17 @@
+<ion-content class="">	
+	<ion-list>
+	
+	<ion-item 
+	ng-repeat="model in collection.models | orderBy:'-startTime' " 
+	item="item" class="item-avatar">
+          
+		<i class="item-image icon-circle historyIcon ion-ios-copy-outline"></i>
+		<h2>{{ model.processDefinitionId.substr(0,model.processDefinitionId.indexOf(':'))}}</h2>
+	  	<p>{{ model.endTime | date: 'dd-MM-yyyy HH:mm' }}</p>
+	  	<ion-option-button class="button button-assertive icon-left ion-trash-b" on-tap="$event.stopPropagation(); delete(model);">{{'delete' | translate}}</ion-option-button>
+	</ion-item>		
+	
+	</ion-list>
+	<ion-infinite-scroll ng-if="collection.state.skip < collection.state.count" on-infinite="loadMore()">
+	</ion-infinite-scroll>	
+</ion-content>

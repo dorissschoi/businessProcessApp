@@ -5,9 +5,9 @@
 	ng-repeat="model in collection.models | orderBy:'-startTime' " 
 	item="item" class="item-avatar">
           
-		<i class="item-image icon-circle historyIcon ion-ios-copy-outline"></i>
-		<h2>{{ model.processDefinitionId.substr(0,model.processDefinitionId.indexOf(':'))}}</h2>
-	  	<p>{{ model.endTime | date: 'dd-MM-yyyy HH:mm' }}</p>
+		<i class="item-image icon-circle activitiIcon ion-ios-person"></i>
+		<h2>{{ model.name }}</h2>
+	  	<p>{{ model.createTime | date: 'dd-MM-yyyy HH:mm' }}</p>
 	</ion-item>		
 	
 	</ion-list>
