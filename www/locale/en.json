@@ -1,6 +1,7 @@
 {
 	"processdef":		"Process definition",
 	"runningprocins":	"Running process instance",
+	"insttask":			"Instance task",
 	"upload":			"Upload",
 	"download":			"Download",
     "save":				"Save",

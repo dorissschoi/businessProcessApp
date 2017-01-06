@@ -51,7 +51,18 @@ angular.module 'starter.model', ['PageableAR']
 			model: Processins
 		
 			$urlRoot: "api/processinsHistory"
+
+		class WorkflowTask extends pageableAR.Model
+			$idAttribute: 'id'
 			
+			$urlRoot: "api/workflowtask"
+		
+		# WorkflowTaskList
+		class WorkflowTaskList extends pageableAR.PageableCollection
+			model: WorkflowTask
+		
+			$urlRoot: "api/workflowtask"		
+						
 		BusinessProcess:		BusinessProcess
 		BusinessProcessList:	BusinessProcessList
 		User:		User
@@ -59,3 +70,5 @@ angular.module 'starter.model', ['PageableAR']
 		Processins:				Processins
 		ProcessinsList:			ProcessinsList
 		ProcessinsHistoryList:	ProcessinsHistoryList
+		WorkflowTask:			WorkflowTask
+		WorkflowTaskList:		WorkflowTaskList

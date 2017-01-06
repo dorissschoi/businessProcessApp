@@ -6,7 +6,7 @@
 	item="item" class="item-avatar">
           
 		<i class="item-image icon-circle historyIcon ion-ios-copy-outline"></i>
-		<h2>{{ model.processDefinitionId.substr(0,model.processDefinitionId.indexOf(':'))}}</h2>
+		<h2>{{ model.processDefinitionId.substr(0,model.processDefinitionId.indexOf(':'))}} <span ng-if="model.deleteReason!==null">- {{model.deleteReason}}</span></h2>
 	  	<p>{{ model.endTime | date: 'dd-MM-yyyy HH:mm' }}</p>
 	  	<ion-option-button class="button button-assertive icon-left ion-trash-b" on-tap="$event.stopPropagation(); delete(model);">{{'delete' | translate}}</ion-option-button>
 	</ion-item>		

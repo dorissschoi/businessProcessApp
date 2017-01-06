@@ -80,5 +80,20 @@ angular.module 'starter', ['ngFancySelect', 'ionic', 'util.auth', 'starter.contr
 				collection: (resources) ->
 					ret = new resources.ProcessinsList()
 					ret.$fetch()
-														
+
+		$stateProvider.state 'app.listTask',
+			url: "/workflowtask/:id"
+			cache: false
+			views:
+				'menuContent':
+					templateUrl: "templates/workflowtask/list.html"
+					controller: 'TaskCtrl'
+			resolve:
+				id: ($stateParams) ->
+					$stateParams.id
+				resources: 'resources'
+				collection: (resources, id) ->
+					ret = new resources.WorkflowTaskList 
+					ret.$fetch params: {procInsId: id, sort: 'createdAt DESC'}
+																			
 		$urlRouterProvider.otherwise('/businessProcess/list')

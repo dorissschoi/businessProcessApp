@@ -19,3 +19,7 @@ module.exports =
 			findOne:	['isAuth']			
 			destroy: 	['isAuth']
 			history: 	['isAuth']
+		WorkflowTaskController:
+			'*':		false
+			find:		['isAuth']
+			findOne:	['isAuth']	

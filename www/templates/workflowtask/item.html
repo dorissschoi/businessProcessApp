@@ -1,0 +1,19 @@
+<ion-content>	
+  <ion-list >
+	<ion-item 
+	ng-repeat="model in collection.models  | orderBy:'-id'" 
+	
+	item="item" class="item-avatar">
+          
+		<i class="item-image icon-circle activitiIcon ion-ios-people"></i>
+		<h2>{{model.name}}
+			<span ng-if="model.owner.value!==null">({{model.owner.value}})</span></h2>
+		<p>{{model.startTime | date: 'dd-MMM HH:mm'}} 
+			<span ng-if="model.endTime!==null">- {{model.endTime | date: 'dd-MMM HH:mm'}}</span></p>
+
+	
+	</ion-item>
+  </ion-list>
+  <ion-infinite-scroll ng-if="collection.state.skip < collection.state.count" on-infinite="loadMore()">
+  </ion-infinite-scroll>
+</ion-content>	

@@ -54,8 +54,13 @@ angular.module 'starter.controller', [ 'ionic', 'http-auth-interceptor', 'ngCord
 						.then (resp) ->
 							$location.url "/businessProcess/list"
 						.catch (err) ->
-							alert {data:{error: "Upload file error."}}	
-	
+							alert {data:{error: "Upload file error."}}
+								
+	.controller 'TaskCtrl', ($rootScope, $scope, $location, collection, resources) ->
+		_.extend $scope,
+			collection: collection
+			resources: resources
+				
 	.controller 'ListProcessinsCtrl', ($rootScope, $stateParams, $scope, collection, $location, resources) ->
 		_.extend $scope,
 			
@@ -66,7 +71,10 @@ angular.module 'starter.controller', [ 'ionic', 'http-auth-interceptor', 'ngCord
 					.then ->
 						$scope.$broadcast('scroll.infiniteScrollComplete')
 					.catch alert
-
+			
+			detail: (item) ->
+				$location.url "/workflowtask/#{item.id}"
+				
 	.controller 'ListProcessinsHistoryCtrl', ($rootScope, $stateParams, $scope, collection, $location, resources) ->
 		_.extend $scope,
 			
