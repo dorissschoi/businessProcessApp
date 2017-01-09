@@ -71,11 +71,11 @@ module.exports =
 		activiti.definition.list data.skip
 			.then (processdefList) ->
 				Promise.all _.map processdefList.results, getDeploymentUser
-			.then (result) ->
-				val =
-					count:		result.length
-					results:	result
-				res.ok(val)
+				.then (result) ->
+					val =
+						count:		processdefList.count
+						results:	result
+					res.ok(val)
 			.catch res.serverError	
 			
 	getXML: (req, res) ->
